@@ -58,13 +58,27 @@ font-size: 26px;
 .div2{
   padding: 50px;
 }
+/* This stylesheet sets the width of all images to 100%: */
+img {
+  width: 100%;
+}
     </style>
 </head>
   <body>
 <form method="POST">
   <div class="page-header">
-      <h1>Hi  <b>The Ultimate Internet Game!!</b>.</h1>
+      <h1> <b>Welcome The Ultimate Internet Game!!</b>.</h1>
+      <h2> <b>Here you can test your skills and show how worthy you are</b>.</h2>
   </div>
+
+  <style>
+body {
+  background-image: url('EPIC.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
           <div class= "div2">
             <button name="join" class="button"> Enter TheTournement </button>
               <small class="Smalltext"> Press this button to fight for the highscore </Small>
