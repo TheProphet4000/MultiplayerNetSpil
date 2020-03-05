@@ -58,7 +58,7 @@ font-size: 26px;
 .div2{
   padding: 50px;
 }
-/* This stylesheet sets the width of all images to 100%: */
+
 img {
   width: 100%;
 }
@@ -67,8 +67,8 @@ img {
   <body>
 <form method="POST">
   <div class="page-header">
-      <h1> <b>Welcome The Ultimate Internet Game!!</b>.</h1>
-      <h2> <b>Here you can test your skills and show how worthy you are</b>.</h2>
+      <h1> <b><font color="white">Welcome The Ultimate Internet Game!!</font></b>.</h1>
+      <h2>  <b><font color="white">Here you can test your skills and show how worthy you are</font></b>.</h1>
   </div>
 
   <style>
@@ -81,11 +81,11 @@ body {
 </style>
           <div class= "div2">
             <button name="join" class="button"> Enter TheTournement </button>
-              <small class="Smalltext"> Press this button to fight for the highscore </Small>
+              <small class="Smalltext"><font color="white">Press this button to fight for the highscore </font></Small>
           </div>
           <div class="div1">
             <button name="create" class="button2"> Practice mode </button>
-                  <small class="Smalltext2"> Give this button a big slapping to test your skills </Small>
+                  <small class="Smalltext2"><font color="white"> Give this button a big slapping to test your skills</font> </Small>
           </div>
   </body>
 </html>
