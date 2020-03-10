@@ -1,9 +1,9 @@
 <?php
-if(isset($_POST["create"])) {
-    header("location: CreateRoom.php");
+if(isset($_POST["Login"])) {
+    header("location: login.php");
 }
-if(isset($_POST["join"])) {
-    header("location: JoinRoom.php");
+if(isset($_POST["Demo"])) {
+    header("location: Flappybird.php");
 }
 // Initialize the session
 session_start();
@@ -17,7 +17,7 @@ session_start();
     <style type="text/css">
         body{ font: 14% sans-serif; text-align: center; }
 .button {
-    background-color: #4CAF50;
+    background-color:#f23a43;
     border: none;
     color: white;
     padding: 30px 35px;
@@ -27,7 +27,6 @@ session_start();
     cursor: pointer;
   }
 .button:hover {
-  background-color: green;
   box-shadow: 2px 2px 1px #444;
 }
 .Smalltext{
@@ -80,11 +79,11 @@ body {
 }
 </style>
           <div class= "div2">
-            <button name="join" class="button"> Enter TheTournement </button>
+            <button name="Login" class="button"> Enter TheTournement </button>
               <small class="Smalltext"><font color="white">Press this button to fight for the highscore </font></Small>
           </div>
           <div class="div1">
-            <button name="create" class="button2"> Practice mode </button>
+            <button name="Demo" class="button2"> Practice mode </button>
                   <small class="Smalltext2"><font color="white"> Give this button a big slapping to test your skills</font> </Small>
           </div>
   </body>
