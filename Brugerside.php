@@ -109,7 +109,7 @@ function updateGameArea() {
     }
     myScore.text="SCORE: "
     myScore.update();
-    myGamePiece.newPos();    
+    myGamePiece.newPos();
     myGamePiece.update();
 }
 

@@ -1,6 +1,9 @@
 <?php
 if(isset($_POST["Login"])) {
-    header("location: login.php");
+  if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: LogInSite/login.php");
+    exit;
+  }
 }
 if(isset($_POST["Demo"])) {
     header("location: Flappybird.php");
@@ -78,6 +81,8 @@ body {
   background-size: cover;
 }
 </style>
+
+
           <div class= "div2">
             <button name="Login" class="button"> Enter TheTournement </button>
               <small class="Smalltext"><font color="white">Press this button to fight for the highscore </font></Small>
