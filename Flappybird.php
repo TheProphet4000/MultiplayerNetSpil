@@ -118,16 +118,11 @@ function updateGameArea() {
     if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 0; }
     if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -8; }
     if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 8; }
+    ScoreTimer.text = "Time: "
+    ScoreTimer.update();
+    
     myGamePiece.newPos();    
     myGamePiece.update();
-
-    function ScoreTimerFunction(){
-    time + 1;
-    }
-    timeInterval()
-    time = 0;
-    ScoreTimer.text = "Time: " + time
-    ScoreTimer.update();
 }
 
 

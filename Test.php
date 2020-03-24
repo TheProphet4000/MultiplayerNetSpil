@@ -107,7 +107,7 @@ function updateGameArea() {
         myObstacles[i].newPos();
         myObstacles[i].update();
     }
-    myScore.text="SCORE: " + myGameArea.frameNo;
+    myScore.text="SCORE: "
     myScore.update();
     myGamePiece.newPos();    
     myGamePiece.update();
