@@ -13,15 +13,17 @@ canvas {
 <script>
 //variabler
 var Spiller;
-var Xmidt = 960/2;
+var Xmidt = 960/2;  // skærmstørrelse/2
 var Ymidt = 540/2;
+
 var TankSpeed = 3;
 var RotationSpeed = 2;
-var TankSize = 4;
+var TankSize = 15;
+var BulletSpeed = 4;
 
 //opsætning
 function startGame() {
-    Spiller = new component(30, 10, "Tank.png", Xmidt, Ymidt, "image");
+    Spiller = new component(10, 10, "Tank.png", Xmidt, Ymidt, "image");
     myGameArea.start();
 }
 //Canvas
@@ -45,7 +47,7 @@ var myGameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
-//Spiller Spawn
+//Spiller Start opsætning
 function component(width, height, color, x, y) {
     this.gamearea = myGameArea;
     this.image = new Image();
@@ -59,14 +61,17 @@ function component(width, height, color, x, y) {
     this.y = y;
     this.update = function() {
       ctx = myGameArea.context;
-      ctx.drawImage(this.image, this.x, this.y, this.width * TankSize, this.height * TankSize *3);
+
+      //tegner tank
+      ctx.drawImage(this.image, this.x /1.175, this.y/1.45, this.width * TankSize, this.height * TankSize);
+      //kassen
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
-      ctx.fillStyle = color;
       ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);
       ctx.restore();
     }
+    //bevæger kassen og tank
     this.newPos = function() {
         this.x += this.speedX;
         this.y += this.speedY;
@@ -74,10 +79,11 @@ function component(width, height, color, x, y) {
 }
 //Controls
 function updateGameArea() {
+  // sætter aller hastigheder til null, så der ikke er noget der flyder rundt
     myGameArea.clear();
     Spiller.speedX = 0;
     Spiller.speedY = 0;
-    //V
+    //V     Dette Styre både tank og kasse, skal bare have sat billedet til kassen
     if (myGameArea.keys && myGameArea.keys[37]) {Spiller.angle -= RotationSpeed*Math.PI / 180;}
     //Ø
     if (myGameArea.keys && myGameArea.keys[39]) {Spiller.angle += RotationSpeed*Math.PI / 180;}
