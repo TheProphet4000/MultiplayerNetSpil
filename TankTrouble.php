@@ -11,11 +11,15 @@ canvas {
 </head>
 <body onload="startGame()">
 <script>
-//variabler
-var Spiller;
-var Xmidt = 960/2;  // skærmstørrelse/2
-var Ymidt = 540/2;
 
+//skærm/setup variabler
+var Spiller;
+var Hight = 540 //canvas højde
+var Width = 960 //canvas bredte
+var Xmidt = Width/2;  // skærmstørrelse/2 for at få midten af canvas
+var Ymidt = Hight/2;
+
+//Tank variabler
 var TankSpeed = 3;
 var RotationSpeed = 2;
 var TankSize = 15;
@@ -29,8 +33,8 @@ function startGame() {
 //Canvas
 var myGameArea = {
     canvas : document.createElement("canvas"), start : function() {
-        this.canvas.width = 960;
-        this.canvas.height = 540;
+        this.canvas.width = Width;
+        this.canvas.height = Hight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 20);
@@ -54,7 +58,6 @@ function component(width, height, color, x, y) {
     this.image.src = color;
     this.width = width;
     this.height = height;
-    this.speedX = 0;
     this.speedY = 0;
     this.angle = 0;
     this.x = x;
