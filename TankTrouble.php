@@ -11,7 +11,8 @@ canvas {
 </head>
 <body onload="startGame()">
 
-<p id="score"> </p>
+<p> The total time you have survived </p>
+<p1 id="score"> </p1>
 
 <script>
 
@@ -21,7 +22,7 @@ var Hight = 540 //canvas højde
 var Width = 960 //canvas bredte
 var Xmidt = Width/2;  // skærmstørrelse/2 for at få midten af canvas
 var Ymidt = Hight/2;
-var point = 0.0;
+var point = 0;
 
 //Tank variabler
 var TankSpeed = 3;
