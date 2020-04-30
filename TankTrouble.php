@@ -10,6 +10,9 @@ canvas {
 </style>
 </head>
 <body onload="startGame()">
+
+<p id="score"> </p>
+
 <script>
 
 //skærm/setup variabler
@@ -18,6 +21,7 @@ var Hight = 540 //canvas højde
 var Width = 960 //canvas bredte
 var Xmidt = Width/2;  // skærmstørrelse/2 for at få midten af canvas
 var Ymidt = Hight/2;
+var point = 0.0;
 
 //Tank variabler
 var TankSpeed = 3;
@@ -37,7 +41,10 @@ var myGameArea = {
         this.canvas.height = Hight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
+
+        //Håndtere tid og timer
+        this.interval = setInterval(updateGameArea, 20);  //updatere med et enterval på 20 millisekunder
+        this.interval = setInterval(givePoint, 1000); //giver point hvert sekund
 
         window.addEventListener('keydown', function (e) {
             myGameArea.keys = (myGameArea.keys || []);
@@ -80,12 +87,17 @@ function component(width, height, color, x, y) {
         this.y += this.speedY;
     }
 }
-//Controls
+//point system
+function givePoint(){
+  point = point+1;
+  document.getElementById("score").innerHTML = point ; //man får et point
+}
 function updateGameArea() {
   // sætter aller hastigheder til null, så der ikke er noget der flyder rundt
     myGameArea.clear();
     Spiller.speedX = 0;
     Spiller.speedY = 0;
+
     //V     Dette Styre både tank og kasse, skal bare have sat billedet til kassen
     if (myGameArea.keys && myGameArea.keys[37]) {Spiller.angle -= RotationSpeed*Math.PI / 180;}
     //Ø
