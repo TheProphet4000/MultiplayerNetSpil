@@ -37,14 +37,14 @@ var TankSize = 15;
 var BulletSpeed = 4;
 
 //DB
-Forbind.connect(function(err){
-  if(err)throw err;
-  var sql ="internetgame learderboard (Bruger_ID,Kode,Email,Score)values("1","Demo","Demo@mail.com","score")"
-  Forbind.query(sql,function(err,result){
-    if(err)throw err;
-    console.log("1 tilføjet")
-  })
-})
+//Forbind.connect(function(err){
+//  if(err)throw err;
+//  var sql ="internetgame learderboard (Bruger_ID,Kode,Email,Score)values("1","Demo","Demo@mail.com","score")"
+//  Forbind.query(sql,function(err,result){
+//    if(err)throw err;
+//    console.log("1 tilføjet")
+//  })
+//  })
 
 //opsætning
 function startGame() {
