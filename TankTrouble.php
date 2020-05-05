@@ -24,11 +24,27 @@ var Xmidt = Width/2;  // skærmstørrelse/2 for at få midten af canvas
 var Ymidt = Hight/2;
 var point = 0;
 
+//Database
+var mysql = require("mysql");
+var Forbind = mysql.createConnection({
+  Bruger_ID:"1", Kode:"Demo", Email:"Demo@mail.com", Score:"score"
+})
+
 //Tank variabler
 var TankSpeed = 3;
 var RotationSpeed = 2;
 var TankSize = 15;
 var BulletSpeed = 4;
+
+//DB
+Forbind.connect(function(err){
+  if(err)throw err;
+  var sql ="internetgame learderboard (Bruger_ID,Kode,Email,Score)values("1","Demo","Demo@mail.com","score")"
+  Forbind.query(sql,function(err,result){
+    if(err)throw err;
+    console.log("1 tilføjet")
+  })
+})
 
 //opsætning
 function startGame() {
