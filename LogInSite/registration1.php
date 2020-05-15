@@ -10,7 +10,7 @@ $mail_body = "
 <p>Hi ".$_POST['username'].",</p>
 <p>Thanks for Registration.</p>
 <p>Please Open this link to verified your email address - <a href=".$base_url."email_verification.php?get_activation_code=".$activation_code.">Verify Link</a>
-<p>Best Regards,<br />LectioForum</p>
+<p>Best Regards,<br />MultiplayerNetSpil.</p>
 ";
 
 $mail = new PHPMailer(TRUE);

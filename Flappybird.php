@@ -1,3 +1,15 @@
+
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: LogInSite/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +22,27 @@ canvas {
 }
 
 </style>
+<p id="demo" style="position:fixed; bottom:75%; left:0%" name = "hej"><p>
 </head>
-<body onload="startGame()">
+<body style="position:fixed; bottom:4%; left:22%";, onload="startGame()">
+<input style="position:fixed; bottom:0%; left:0%" type="button" onclick="restart()" value="Reset">
 
 <script>
 
 var myGamePiece;
 var myObstacles = [];
 var ScoreTimer;
+var plusOne = 0;
+var minutes = 0;
+var ScoreTimer1 = "Time: " + minutes + "m " + plusOne + "s";
+var score = minutes * 60 + plusOne;
+var hejhej = "hejhejhej";
+
+document.getElementById("demo").innerHTML = hejhej;
 
 function startGame() {
     myGamePiece = new component(30, 30, "red", 10, 120);
-    ScoreTimer = new component("30px", "Consolas", "black", 280, 40, "text")
+    ScoreTimer = new component("30px", "Consolas", "black", 1100, 40, "text");
     myGameArea.start();
 }
 
@@ -30,13 +51,11 @@ var myGameArea = {
     start : function() {
         this.canvas.width = 1300;
         this.canvas.height = 700;
-        this.canvas.left = "400px";
-        this.canvas.top = "400px";
-        this.canvas.position = "absolute";
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
+
         window.addEventListener('keydown', function (e) {
             myGameArea.keys = (myGameArea.keys || []);
             myGameArea.keys[e.keyCode] = (e.type == "keydown");
@@ -47,13 +66,16 @@ var myGameArea = {
     }, 
     clear : function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        
     },
     stop : function() {
         clearInterval(this.interval);
     }
 }
 
-function component(width, height, color, x, y) {
+function component(width, height, color, x, y, type) {
+    this.type = type;
     this.gamearea = myGameArea;
     this.width = width;
     this.height = height;
@@ -63,9 +85,15 @@ function component(width, height, color, x, y) {
     this.y = y;    
     this.update = function() {
         ctx = myGameArea.context;
-        ctx.fillStyle = color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }    
     this.newPos = function() {
         this.x += this.speedX;
         this.y += this.speedY;        
@@ -92,9 +120,11 @@ function updateGameArea() {
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
             myGameArea.stop();
+            
             return;
         } 
     }
+    
     myGameArea.clear();
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(100)) {
@@ -118,19 +148,42 @@ function updateGameArea() {
     if (myGameArea.keys && myGameArea.keys[39]) {myGamePiece.speedX = 0; }
     if (myGameArea.keys && myGameArea.keys[38]) {myGamePiece.speedY = -8; }
     if (myGameArea.keys && myGameArea.keys[40]) {myGamePiece.speedY = 8; }
-    ScoreTimer.text = "Time: "
+
+    if (plusOne > 59){
+        plusOne = plusOne - 60;
+        minutes = minutes + 1;
+    }
+    ScoreTimer.text = "Time: " + minutes + "m " + plusOne + "s";
     ScoreTimer.update();
-    
     myGamePiece.newPos();    
     myGamePiece.update();
+    ScoreTimer1.update();
+
 }
 
-
+function restart() {
+    myGameArea.stop();
+    for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].x += -1300; 
+        myObstacles[i].update();
+    }
+    plusOne = 0;
+    minutes = 0;
+    myGameArea.clear();
+    myGameArea.start();
+}
 
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
     return false;
 }
+
+function Timer123() {
+    plusOne = plusOne + 1;
+}
+
+setInterval(Timer123, 1000);
+    
 </script>
 
 </body>

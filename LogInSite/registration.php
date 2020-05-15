@@ -4,44 +4,12 @@
 require_once "connectmysql.php";
 
 // Define variables and initialize with empty values
-$email = $username = $password = $confirm_password = "";
-$email_err = $username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = "";
+$username_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     
-    if(empty(trim($_POST["email"]))){
-        $email_err = "Please enter an email.";
-    } else{
-        // Prepare a select statement
-        $sql = "SELECT id FROM brugere WHERE email = ?";
-      
-        if($statement = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $statement->bind_param("s", $param_email);
-            
-            // Set parameters
-            $param_email = trim($_POST["email"]);
-
-            // Attempt to execute the prepared statement
-            if($statement->execute()){
-                // store result
-                $statement->store_result();
-                
-                if($statement->num_rows == 1){
-                    $username_err = "This email is already taken.";
-                } else{
-                    $email = trim($_POST["email"]);
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-            
-        // Close statement
-        $statement->close();
-    }
-
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
@@ -95,28 +63,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
 
-        $sql = "INSERT INTO brugere (username, email, password, activation_code) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO brugere (username, password) VALUES ( ?, ?)";
          
         if($statement = $mysqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $statement->bind_param("ssss", $param_username, $param_email, $param_password, $activation_code);
+            $statement->bind_param("ss", $param_username, $param_password);
             
             // Set parameters
             $param_username = $username;
-            $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            $activation_code = md5(rand());
             
-            require 'registration1.php';
+
 
             // Attempt to execute the prepared statement
             if($statement->execute()){
                 // Redirect to login page
-                header("location: login.php");
+                header("location: http://localhost/MultiplayerNetSpil/Forside.php");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
@@ -148,11 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-                <label>Email</label>
-                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
-                <span class="help-block"><?php echo $email_err; ?></span>
-            </div>
+        
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
@@ -172,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+            <p>Already have an account? <a href="http://localhost/MultiplayerNetSpil/Forside.php">Login here</a>.</p>
         </form>
     </div>    
 </body>
