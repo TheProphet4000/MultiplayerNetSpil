@@ -1,20 +1,34 @@
 <?php
-
-if(isset($_POST["Login"])) {
-  header("location: Forside2.php");
-}
-
-if(isset($_POST["Demo"])) {
-    header("location: ForsideDEMO.php");
-}
-// Initialize the session
 session_start();
+
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: http://localhost/MultiplayerNetSpil/LogInSite/login.php");
+    exit;
+}
+
+if(isset($_POST["FlappyFugl"])) {
+    header("location: FlappybirdWITHLOGIN.php");
+}
+
+if(isset($_POST["TankTrouble"])) {
+    header("location: TankTroubleWITHLOGIN.php");
+}
+
+if(isset($_POST["Back"])) {
+    header("location: http://localhost/MultiplayerNetSpil/Forside.php");
+}
+
+if(isset($_POST["Log-out"])) {
+    require 'logout.php';
+    header("location: http://localhost/MultiplayerNetSpil/Forside.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>The Tournament</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14% sans-serif; text-align: center; }
@@ -22,7 +36,6 @@ session_start();
     background-color:#f23a43;
     border: none;
     color: white;
-    padding: 30px 35px;
     text-align: center;
     font-size: 26px;
     box-shadow: 4px 4px 2px #444;
@@ -39,7 +52,6 @@ font-size: 26px;
       background-color: #f23a43;
       border: none;
       color: white;
-      padding: 30px 35px;
       text-align: center;
       font-size: 26px;
       cursor: pointer;
@@ -54,10 +66,10 @@ display: block;
 font-size: 26px;
 }
 .div1{
-  padding: 50px;
+  padding: 20px;
 }
 .div2{
-  padding: 50px;
+  padding: 20px;
 }
 
 img {
@@ -83,12 +95,18 @@ body {
 
 
           <div class= "div2">
-            <button name="Login" class="button"> Enter TheTournement </button>
+            <button style="height:80px; width:200px; bottom:100%;" name="FlappyFugl" class="button"> FlappyFugl </button>
               <small class="Smalltext"><font color="white">Press this button to fight for the highscore </font></Small>
           </div>
           <div class="div1">
-            <button name="Demo" class="button2"> Practice mode </button>
-                  <small class="Smalltext2"><font color="white"> Give this button a big slapping to test your skills</font> </Small>
+            <button style="height:80px; width:200px; bottom:20%;" name="TankTrouble" class="button2"> TankTrouble </button>
+                  <small class="Smalltext2"><font color="white"> Press this button to fight for the highscore</font> </Small>
+          </div>
+          <div class= "div2">
+            <button style="height:80px; width:200px; bottom:20%;" name="Back" class="button"> Back </button>
+          </div>
+          <div class="div1">
+            <button style="height:80px; width:200px; bottom:0%" name="Log-out" class="button2"> Log-out </button>
           </div>
   </body>
 </html>
