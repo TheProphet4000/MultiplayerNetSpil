@@ -1,11 +1,11 @@
 <?php
 
 if(isset($_POST["FlappyFugl"])) {
-    header("location: FlappybirdWITHLOGIN.php");
+    header("location: Flappybird.php");
 }
 
 if(isset($_POST["TankTrouble"])) {
-    header("location: TankTroubleWITHLOGIN.php");
+    header("location: TankTrouble.php");
 }
 
 if(isset($_POST["Back"])) {
